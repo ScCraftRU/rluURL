@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">rluURL</string>
+    <string name="action_about">about</string>
+    <string name="title_shortenURL">shorten URL</string>
+    <string name="removeTime_hint">0 - 720 hours (0 - to create a perpetual link)</string>
+    <string name="previewLink">preview</string>
+    <string name="shorten">Shorten URL</string>
+    <string name="ok">ОК</string>
+    <string name="noNetwork">No network connection</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-2743559009390249/1883113615</string>
+    <string name="version">"Version: "</string>
+    <string name="versionCode">Build #</string>
+    <string name="rateApp">Rate this APP</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="goToGooglePlayQestion">Go to GooglePlay store?</string>
+    <string name="about">About</string>
+    <string name="info_short">Short URL</string>
+    <string name="info_long">Long URL</string>
+    <string name="info_tittle">Link detalis</string>
+    <string-array name="noLinksHistory">
+        <item>No shortened links!</item>
+        <item>To use history, shorten at least 2 links</item>
+    </string-array>
+</resources>

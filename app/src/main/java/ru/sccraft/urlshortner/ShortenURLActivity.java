@@ -1,0 +1,118 @@
+package ru.sccraft.urlshortner;
+
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.Switch;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+public class ShortenURLActivity extends AppCompatActivity {
+    EditText longURL, removeTime, shortURL;
+    Switch preview;
+    Net n;
+    Boolean isPreview = false;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shorten_url);
+        setupActionBar();
+        setTitle(getString(R.string.title_shortenURL));
+        longURL = (EditText) findViewById(R.id.longURL);
+        shortURL = (EditText) findViewById(R.id.shortURL);
+        removeTime = (EditText) findViewById(R.id.removeTime);
+        preview = (Switch) findViewById(R.id.preview);
+        preview.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isPreview = isChecked;
+            }
+        });
+        n = (Net) getLastCustomNonConfigurationInstance();
+        if (n == null) {
+            n = new Net(this);
+        } else {
+            n.link(this);
+        }
+
+        AdView mAdView;
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
+    private void setupActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // Show the Up button in the action bar.
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public void shortenURL(View view) {
+        n.execute();
+    }
+
+    private class Net extends AsyncTask<Void, Void, String> {
+        String longURL;
+        ShortenURLActivity a;
+        int removeTime;
+        boolean preview;
+
+        Net(ShortenURLActivity activity) {
+            a = activity;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            longURL = a.longURL.getText().toString();
+            try {
+                removeTime = Integer.parseInt(a.removeTime.getText().toString());
+            }catch (NumberFormatException e) {
+                e.printStackTrace();
+                removeTime = 0;
+            }
+            preview = a.isPreview;
+        }
+
+        @Override
+        protected String doInBackground(Void... params) {
+            String длинная_ссылка = "" + this.longURL;
+            try {
+                longURL = URLEncoder.encode(longURL,"UTF8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            String HTTP_ЗАПРОС = "http://rlu.ru/index.sema?a=api&del=" + removeTime + "&preview=" + (preview ? "1" : "0") + "&link=" + longURL;
+            //if (NetGet.getNetworkConnectionStatus(a)) return a.getString(R.string.noNetwork);
+            String КОРОТКАЯ_ССЫЛКА = NetGet.getOneLine(HTTP_ЗАПРОС);
+            if ((КОРОТКАЯ_ССЫЛКА.contains("http"))&&(removeTime == 0)) new Fe(a).saveFile("" + fileList().length + ".json", new Link(длинная_ссылка, КОРОТКАЯ_ССЫЛКА).toJSON());
+            return КОРОТКАЯ_ССЫЛКА;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            a.shortURL.setText(s);
+        }
+
+        void link(ShortenURLActivity activity) {
+            a = activity;
+        }
+    }
+
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        return n;
+    }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">rluURL</string>
+    <string name="action_about">О программе</string>
+    <string name="title_shortenURL">Сократить URL</string>
+    <string name="ok">ОК</string>
+    <string name="removeTime_hint">0-720 часов (0 - для создания вечной ссылки)</string>
+    <string name="previewLink">Предварительный просмотр перед переходом</string>
+    <string name="noNetwork">Нет подключения к интернету</string>
+    <string name="shorten">Сократить URL</string>
+    <string name="version">"Версия: "</string>
+    <string name="versionCode">"Сборка № "</string>
+    <string name="rateApp">Оценить приложение</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+    <string name="goToGooglePlayQestion">Перейти в Google Play?</string>
+    <string name="about">О программе</string>
+    <string name="info_long">Длинная ссылка</string>
+    <string name="info_short">Короткая ссылка</string>
+    <string name="info_tittle">Ссылка</string>
+    <string-array name="noLinksHistory">
+        <item>Нет сокращённых ссылок!</item>
+        <item>Для использования этой истории, сократите, как минимум, 2 ссылки</item>
+    </string-array>
+</resources>

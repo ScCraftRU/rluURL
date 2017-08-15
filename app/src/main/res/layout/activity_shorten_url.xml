@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    tools:context="ru.sccraft.urlshortner.ShortenURLActivity"
+    android:orientation="vertical">
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/adView"
+        android:layout_alignParentEnd="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="\n\n" />
+
+            <EditText
+                android:id="@+id/longURL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="http://example.com/page"
+                android:inputType="textUri|textWebEmailAddress" />
+
+            <EditText
+                android:id="@+id/removeTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/removeTime_hint"
+                android:inputType="number" />
+
+            <Switch
+                android:id="@+id/preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/previewLink" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="shortenURL"
+                android:text="@string/shorten" />
+
+            <EditText
+                android:id="@+id/shortURL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="http://rlu.ru/"
+                android:selectAllOnFocus="true"
+                android:textIsSelectable="true" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

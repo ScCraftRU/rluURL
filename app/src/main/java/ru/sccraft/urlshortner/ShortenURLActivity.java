@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -59,7 +60,13 @@ public class ShortenURLActivity extends AppCompatActivity {
     }
 
     public void shortenURL(View view) {
-        n.execute();
+        try{
+            n.execute();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+            n = new Net(this);
+        }
     }
 
     private class Net extends AsyncTask<Void, Void, String> {

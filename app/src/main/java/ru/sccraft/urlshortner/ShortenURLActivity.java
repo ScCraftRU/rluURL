@@ -64,8 +64,9 @@ public class ShortenURLActivity extends AppCompatActivity {
             n.execute();
         } catch (IllegalStateException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "ERROR", Toast.LENGTH_SHORT).show();
             n = new Net(this);
+            n.execute();
         }
     }
 

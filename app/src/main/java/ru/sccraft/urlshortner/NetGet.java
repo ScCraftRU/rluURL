@@ -10,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by alexandr on 25.03.17.
  */
@@ -17,13 +19,13 @@ import java.util.ArrayList;
 public class NetGet {
     public static String getOneLine(String webAdress) {
         URL url;
-        HttpURLConnection conn;
+        HttpsURLConnection conn;
         BufferedReader rd;
         String line;
         String result = "";
         try {
             url = new URL(webAdress);
-            conn = (HttpURLConnection) url.openConnection();
+            conn = (HttpsURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             while ((line = rd.readLine()) != null) {
@@ -32,33 +34,6 @@ public class NetGet {
             rd.close();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        return result;
-    }
-
-    public static String[] getMultiLine(String webAdress) {
-        URL url;
-        HttpURLConnection conn;
-        BufferedReader rd;
-        String line;
-        ArrayList<String> al = new ArrayList<>();
-        String[] result;
-        try {
-            url = new URL(webAdress);
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-            while ((line = rd.readLine()) != null) {
-                if (!(line.equals(""))) {
-                    al.add(line);
-                }
-            }
-            rd.close();
-            result = al.toArray(new String[al.size()]);
-        } catch (Exception e) {
-            e.printStackTrace();
-            result = new String[1];
-            result[0] = "Connection error";
         }
         return result;
     }

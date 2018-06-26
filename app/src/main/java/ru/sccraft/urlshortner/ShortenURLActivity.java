@@ -101,9 +101,9 @@ public class ShortenURLActivity extends AppCompatActivity {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            String HTTP_ЗАПРОС = "http://rlu.ru/index.sema?a=api&del=" + removeTime + "&preview=" + (preview ? "1" : "0") + "&link=" + longURL;
+            String HTTPS_ЗАПРОС = "https://rlu.ru/index.sema?a=api&del=" + removeTime + "&preview=" + (preview ? "1" : "0") + "&link=" + longURL;
             //if (NetGet.getNetworkConnectionStatus(a)) return a.getString(R.string.noNetwork);
-            String КОРОТКАЯ_ССЫЛКА = NetGet.getOneLine(HTTP_ЗАПРОС);
+            String КОРОТКАЯ_ССЫЛКА = NetGet.getOneLine(HTTPS_ЗАПРОС);
             if ((КОРОТКАЯ_ССЫЛКА.contains("http"))&&(removeTime == 0)) new Fe(a).saveFile("" + fileList().length + ".json", new Link(длинная_ссылка, КОРОТКАЯ_ССЫЛКА).toJSON());
             return КОРОТКАЯ_ССЫЛКА;
         }

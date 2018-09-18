@@ -26,6 +26,8 @@ public class ShortenURLActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shorten_url);
+        Fe fe = new Fe(this);
+        if (!fe.getFile("adid").contains("1")) finish();
         setupActionBar();
         setTitle(getString(R.string.title_shortenURL));
         longURL = (EditText) findViewById(R.id.longURL);

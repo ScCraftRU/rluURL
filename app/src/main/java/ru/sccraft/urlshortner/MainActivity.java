@@ -1,8 +1,10 @@
 package ru.sccraft.urlshortner;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,14 +24,17 @@ public class MainActivity extends AppCompatActivity {
     String[] file;
     ArrayList<Link> links;
     private static final String LOG_TAG = "MainActivity";
+    private boolean разрешить_использование_интендификатора = false;
+    Fe fe;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,12 +42,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        lw = (ListView) findViewById(R.id.lw);
+        lw = findViewById(R.id.lw);
         file = fileList();
-        Fe fe = new Fe(this);
+        fe = new Fe(this);
+        {
+            String рекламаID = fe.getFile("adid");
+            if (рекламаID.contains("1")) {
+                разрешить_использование_интендификатора = true;
+            } else {
+                запросить_интендификатор();
+            }
+        }
         links = new ArrayList<>();
         for (String файл : file) {
-            if (файл.contains("rList-ru.sccraft.urlshortner.")) continue; //устраняет сбой на Samsung GALAXY S6
+            if (!файл.contains(".json")) continue; //устраняет сбой на Samsung GALAXY S6
             Log.i(LOG_TAG, "Содержание файла " + файл + " : " + fe.getFile(файл));
             if (!(файл.equals("instant-run"))) links.add(Link.fromJSON(fe.getFile(файл)));
         }
@@ -93,8 +107,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void info(Link link) {
+        if (!разрешить_использование_интендификатора) Toast.makeText(getApplicationContext(), "Please, restart this app!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent(MainActivity.this, LinkInfoActivity.class);
         intent.putExtra("link", link);
         startActivity(intent);
+    }
+
+    private void запросить_интендификатор() {
+        AlertDialog.Builder диалог = new AlertDialog.Builder(this);
+        диалог.setTitle(R.string.intendificatorReqest)
+                .setMessage(R.string.intendificatorMessage)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        fe.saveFile("adid", "1");
+                        разрешить_использование_интендификатора = true;
+                    }
+                })
+                .setNegativeButton(R.string.about, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+        диалог.show();
     }
 }

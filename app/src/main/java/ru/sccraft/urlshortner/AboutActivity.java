@@ -89,4 +89,10 @@ public class AboutActivity extends AppCompatActivity {
         }
         return super.onCreateDialog(id);
     }
+
+    public void privacyPolicy(View view) {
+        Uri ссылка_на_политику_конфиденциальности = Uri.parse("http://sccraft.ru/android-app/rluurl/privacy/");
+        Intent открыть_политику_конфиденциальности_в_браузере = new Intent(Intent.ACTION_VIEW, ссылка_на_политику_конфиденциальности);
+        startActivity(открыть_политику_конфиденциальности_в_браузере);
+    }
 }

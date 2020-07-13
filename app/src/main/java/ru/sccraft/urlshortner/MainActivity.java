@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "MainActivity";
     private boolean разрешить_использование_интендификатора = false;
     Fe fe;
+    boolean задать_адаптер = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,21 +57,29 @@ public class MainActivity extends AppCompatActivity {
         links = new ArrayList<>();
         for (String файл : file) {
             if (!файл.contains(".json")) continue; //устраняет сбой на Samsung GALAXY S6
+            if (файл.contains("PersistedInstallation")) continue; //Устраняет сбой и пустые строки на Android 11
             Log.i(LOG_TAG, "Содержание файла " + файл + " : " + fe.getFile(файл));
-            if (!(файл.equals("instant-run"))) links.add(Link.fromJSON(fe.getFile(файл)));
+            if (!(файл.equals("instant-run"))){
+                links.add(Link.fromJSON(fe.getFile(файл)));
+                задать_адаптер = true;
+            }
         }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (file.length < 1) {
+        if (!задать_адаптер) {
             lw.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.noLinksHistory)));
             return;
         }
         String[] длинные_ссылки = new String[links.size()];
         for(int i = 0; i < links.size(); i++) {
             длинные_ссылки[i] = links.get(i).longU;
+            if (длинные_ссылки[i] == null) {
+                Log.e(LOG_TAG, "В массиве \"Длинные ссылки\" на индексе №" + i + " обнаружен NULL");
+                длинные_ссылки[i] = "";
+            }
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, длинные_ссылки);
         lw.setAdapter(adapter);

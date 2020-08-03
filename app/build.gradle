@@ -2,13 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion '30.0.0'
+    buildToolsVersion '30.0.1'
     defaultConfig {
         applicationId "ru.sccraft.urlshortner"
         minSdkVersion 17
         targetSdkVersion 30
-        versionCode 19
-        versionName "1.7"
+        versionCode 20
+        versionName "1.8"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

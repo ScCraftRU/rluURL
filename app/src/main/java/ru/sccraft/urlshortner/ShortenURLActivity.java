@@ -9,9 +9,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -45,11 +42,6 @@ public class ShortenURLActivity extends AppCompatActivity {
         } else {
             n.link(this);
         }
-
-        AdView mAdView;
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
     private void setupActionBar() {

@@ -5,9 +5,6 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.EditText;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 public class LinkInfoActivity extends AppCompatActivity {
 
     Link link;
@@ -24,11 +21,6 @@ public class LinkInfoActivity extends AppCompatActivity {
         longU = (EditText) findViewById(R.id.info_long);
         shortU.setText(link.shortU);
         longU.setText(link.longU);
-
-        AdView mAdView;
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
     private void setupActionBar() {

@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "rluURL"
 include ':app'
+include ':rlu_ru_api'

@@ -4,18 +4,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 
 public class ShortenURLActivity extends AppCompatActivity {
+    private final String LOG_TAG = "ShortenURLActivity";
     EditText longURL, removeTime, shortURL;
     Switch preview;
     Net n;
@@ -26,7 +27,7 @@ public class ShortenURLActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shorten_url);
         Fe fe = new Fe(this);
-        if (!fe.getFile("adid").contains("1")) finish();
+        //if (!fe.getFile("adid").contains("1")) finish(); //Нет рекламы. Не нужно...
         setupActionBar();
         setTitle(getString(R.string.title_shortenURL));
         longURL = (EditText) findViewById(R.id.longURL);
@@ -45,11 +46,6 @@ public class ShortenURLActivity extends AppCompatActivity {
         } else {
             n.link(this);
         }
-
-        AdView mAdView;
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
     private void setupActionBar() {
@@ -98,11 +94,11 @@ public class ShortenURLActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             String длинная_ссылка = "" + this.longURL;
             try {
-                longURL = URLEncoder.encode(longURL,"UTF8");
+                длинная_ссылка = URLEncoder.encode(longURL,"UTF8");
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-            String HTTPS_ЗАПРОС = "https://rlu.ru/index.sema?a=api&del=" + removeTime + "&preview=" + (preview ? "1" : "0") + "&link=" + longURL;
+            String HTTPS_ЗАПРОС = "https://rlu.ru/index.sema?a=api&del=" + removeTime + "&preview=" + (preview ? "1" : "0") + "&link=" + длинная_ссылка;
             //if (NetGet.getNetworkConnectionStatus(a)) return a.getString(R.string.noNetwork);
             String КОРОТКАЯ_ССЫЛКА = NetGet.getOneLine(HTTPS_ЗАПРОС);
             if ((КОРОТКАЯ_ССЫЛКА.contains("http"))&&(removeTime == 0)) new Fe(a).saveFile("" + fileList().length + ".json", new Link(длинная_ссылка, КОРОТКАЯ_ССЫЛКА).toJSON());

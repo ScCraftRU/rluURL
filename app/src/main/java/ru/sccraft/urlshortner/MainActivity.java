@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
             if (рекламаID.contains("1")) {
                 разрешить_использование_интендификатора = true;
             } else {
-                запросить_интендификатор();
+                //Рекламы нет. Сейчас не нужно.
+                //запросить_интендификатор();
             }
         }
         links = new ArrayList<>();
@@ -123,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void запросить_интендификатор() {
+        /*
+        Нужно только если в приложении реклама. Иначе - бесполезный код.
+        */
         AlertDialog.Builder диалог = new AlertDialog.Builder(this);
         диалог.setTitle(R.string.intendificatorReqest)
                 .setMessage(R.string.intendificatorMessage)

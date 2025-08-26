@@ -58,7 +58,7 @@ public class AboutActivity extends AppCompatActivity {
     protected Dialog onCreateDialog(int id) {
         if (id == 1) {
             String title = getString(R.string.rateApp);
-            String message = getString(R.string.goToGooglePlayQestion);
+            String message = getString(R.string.goToRuStoreQestion);
             String button1String = getString(R.string.yes);
             String button2String = getString(R.string.no);
 
@@ -69,7 +69,7 @@ public class AboutActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int arg1) {
                     try {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("market://details?id=ru.sccraft.urlshortner"));
+                        intent.setData(Uri.parse("https://rustore.ru/catalog/app/ru.sccraft.urlshortner"));
                         startActivity(intent);
                     }catch (ActivityNotFoundException e) {
                         e.printStackTrace();

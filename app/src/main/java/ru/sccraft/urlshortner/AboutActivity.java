@@ -95,4 +95,10 @@ public class AboutActivity extends AppCompatActivity {
         Intent открыть_политику_конфиденциальности_в_браузере = new Intent(Intent.ACTION_VIEW, ссылка_на_политику_конфиденциальности);
         startActivity(открыть_политику_конфиденциальности_в_браузере);
     }
+
+    public void view_source_code(View view) {
+        Uri ссылка_на_лицензию = Uri.parse("https://github.com/ScCraftRU/rluURL");
+        Intent открыть_лицензию_в_браузере = new Intent(Intent.ACTION_VIEW, ссылка_на_лицензию);
+        startActivity(открыть_лицензию_в_браузере);
+    }
 }

@@ -48,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -74,6 +75,15 @@
                 android:layout_gravity="center"
                 android:onClick="privacyPolicy"
                 android:text="@string/privacy" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="@string/view_source_code"
+                android:onClick="view_source_code"/>
         </LinearLayout>
     </ScrollView>
 

@@ -13,7 +13,7 @@
     <string name="rateApp">Rate this APP</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="goToGooglePlayQestion">Go to GooglePlay store?</string>
+    <string name="goToRuStoreQestion">Go to RuStore?</string>
     <string name="about">About</string>
     <string name="info_short">Short URL</string>
     <string name="info_long">Long URL</string>
@@ -25,4 +25,5 @@
     <string name="intendificatorReqest">Please provide access to your advertising ID</string>
     <string name="intendificatorMessage">This app is free, but it contains ads.\nDue to the fact that AdMob by default uses an advertising intensifier, and Google Play requires the user\'s consent to use the advertising intensifier, you need either to allow access to the intensifier, or to refuse to use this application.\n\nPrivacy policy is available in the About window.</string>
     <string name="privacy">Privacy policy</string>
+    <string name="view_source_code">Source code</string>
 </resources>

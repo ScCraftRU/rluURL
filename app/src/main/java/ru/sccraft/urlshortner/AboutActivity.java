@@ -58,7 +58,7 @@ public class AboutActivity extends AppCompatActivity {
     protected Dialog onCreateDialog(int id) {
         if (id == 1) {
             String title = getString(R.string.rateApp);
-            String message = getString(R.string.goToGooglePlayQestion);
+            String message = getString(R.string.goToRuStoreQestion);
             String button1String = getString(R.string.yes);
             String button2String = getString(R.string.no);
 
@@ -69,7 +69,7 @@ public class AboutActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int arg1) {
                     try {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setData(Uri.parse("market://details?id=ru.sccraft.urlshortner"));
+                        intent.setData(Uri.parse("https://rustore.ru/catalog/app/ru.sccraft.urlshortner"));
                         startActivity(intent);
                     }catch (ActivityNotFoundException e) {
                         e.printStackTrace();
@@ -94,5 +94,11 @@ public class AboutActivity extends AppCompatActivity {
         Uri ссылка_на_политику_конфиденциальности = Uri.parse("http://sccraft.ru/android-app/rluurl/privacy/");
         Intent открыть_политику_конфиденциальности_в_браузере = new Intent(Intent.ACTION_VIEW, ссылка_на_политику_конфиденциальности);
         startActivity(открыть_политику_конфиденциальности_в_браузере);
+    }
+
+    public void view_source_code(View view) {
+        Uri ссылка_на_лицензию = Uri.parse("https://github.com/ScCraftRU/rluURL");
+        Intent открыть_лицензию_в_браузере = new Intent(Intent.ACTION_VIEW, ссылка_на_лицензию);
+        startActivity(открыть_лицензию_в_браузере);
     }
 }

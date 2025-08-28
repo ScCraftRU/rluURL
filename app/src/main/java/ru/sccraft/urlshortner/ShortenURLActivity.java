@@ -101,7 +101,7 @@ public class ShortenURLActivity extends AppCompatActivity {
             String HTTPS_ЗАПРОС = "https://rlu.ru/index.sema?a=api&del=" + removeTime + "&preview=" + (preview ? "1" : "0") + "&link=" + длинная_ссылка;
             //if (NetGet.getNetworkConnectionStatus(a)) return a.getString(R.string.noNetwork);
             String КОРОТКАЯ_ССЫЛКА = NetGet.getOneLine(HTTPS_ЗАПРОС);
-            if ((КОРОТКАЯ_ССЫЛКА.contains("http"))&&(removeTime == 0)) new Fe(a).saveFile("" + fileList().length + ".json", new Link(длинная_ссылка, КОРОТКАЯ_ССЫЛКА).toJSON());
+            if ((КОРОТКАЯ_ССЫЛКА.contains("http"))&&(removeTime == 0)) new Fe(a).saveFile("" + fileList().length + ".json", new Link(this.longURL, КОРОТКАЯ_ССЫЛКА).toJSON());
             return КОРОТКАЯ_ССЫЛКА;
         }
 

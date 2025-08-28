@@ -3,13 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     tools:context="ru.sccraft.urlshortner.ShortenURLActivity"
     android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="35dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -19,11 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="\n\n" />
 
             <EditText
                 android:id="@+id/longURL"

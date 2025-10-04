@@ -16,3 +16,8 @@ fun short_url(url: String, preview: Boolean = false, del_time: Int = 0): String?
     val ответ = response.body()
     return ответ
 }
+
+fun main() {
+    val url = short_url("https://ya.ru/")
+    print(url)
+}

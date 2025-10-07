@@ -28,7 +28,6 @@ public class ShortenURLActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shorten_url);
         Fe fe = new Fe(this);
         //if (!fe.getFile("adid").contains("1")) finish(); //Нет рекламы. Не нужно...
-        setupActionBar();
         setTitle(getString(R.string.title_shortenURL));
         longURL = (EditText) findViewById(R.id.longURL);
         shortURL = (EditText) findViewById(R.id.shortURL);
@@ -45,14 +44,6 @@ public class ShortenURLActivity extends AppCompatActivity {
             n = new Net(this);
         } else {
             n.link(this);
-        }
-    }
-
-    private void setupActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            // Show the Up button in the action bar.
-            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 

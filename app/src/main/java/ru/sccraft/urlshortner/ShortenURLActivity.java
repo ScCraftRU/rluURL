@@ -2,10 +2,10 @@ package ru.sccraft.urlshortner;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.appcompat.app.ActionBar;
+
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -13,9 +13,9 @@ import android.widget.Switch;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.net.UnknownHostException;
 
 public class ShortenURLActivity extends AppCompatActivity {
+
     private final String LOG_TAG = "ShortenURLActivity";
     EditText longURL, removeTime, shortURL;
     Switch preview;
@@ -25,6 +25,7 @@ public class ShortenURLActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_shorten_url);
         Fe fe = new Fe(this);
         //if (!fe.getFile("adid").contains("1")) finish(); //Нет рекламы. Не нужно...

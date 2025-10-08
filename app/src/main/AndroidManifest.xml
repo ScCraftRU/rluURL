@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ru.sccraft.urlshortner">
+    package="ru.sccraft.urlshortner" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -10,36 +10,40 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".ShortenURLActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ru.sccraft.urlshortner.MainActivity" />
+            >
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.shortcuts"
+
+            <meta-data
+                android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2743559009390249~9406380414"/>
-
-        <activity android:name=".ShortenURLActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="ru.sccraft.urlshortner.MainActivity" />
-        </activity>
+            android:value="ca-app-pub-2743559009390249~9406380414" />
         <activity android:name=".AboutActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.sccraft.urlshortner.MainActivity" />
         </activity>
-        <activity android:name=".LinkInfoActivity">
+        <activity android:name=".LinkInfoActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ru.sccraft.urlshortner.MainActivity" />

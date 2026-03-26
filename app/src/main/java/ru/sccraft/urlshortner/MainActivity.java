@@ -7,6 +7,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView lw;
+    RecyclerView rw;
     String[] file;
     ArrayList<Link> links;
     private static final String LOG_TAG = "MainActivity";
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         lw = findViewById(R.id.lw);
+        rw = findViewById(R.id.rw);
         file = fileList();
         fe = new Fe(this);
         {
@@ -91,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 info(links.get(position));
             }
         });
+        LinkAdapter la = new LinkAdapter(links);
+        rw.setAdapter(la);
     }
 
     @Override

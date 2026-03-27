@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView lw;
     RecyclerView rw;
     String[] file;
     ArrayList<Link> links;
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        lw = findViewById(R.id.lw);
         rw = findViewById(R.id.rw);
         file = fileList();
         fe = new Fe(this);
@@ -75,25 +73,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!задать_адаптер) {
-            lw.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.noLinksHistory)));
+            //TODO: Нет ссылок, которые сокращены
             return;
         }
-        String[] длинные_ссылки = new String[links.size()];
-        for(int i = 0; i < links.size(); i++) {
-            длинные_ссылки[i] = links.get(i).longU;
-            if (длинные_ссылки[i] == null) {
-                Log.e(LOG_TAG, "В массиве \"Длинные ссылки\" на индексе №" + i + " обнаружен NULL");
-                длинные_ссылки[i] = "";
-            }
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, длинные_ссылки);
-        lw.setAdapter(adapter);
-        lw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                info(links.get(position));
-            }
-        });
         LinkAdapter la = new LinkAdapter(links);
         rw.setAdapter(la);
     }

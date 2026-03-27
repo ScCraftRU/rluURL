@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     String[] file;
     ArrayList<Link> links;
     private static final String LOG_TAG = "MainActivity";
-    private boolean разрешить_использование_интендификатора = false;
+    static boolean разрешить_использование_интендификатора = false;
     Fe fe;
     boolean задать_адаптер = false;
 

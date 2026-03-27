@@ -1,7 +1,10 @@
 package ru.sccraft.urlshortner
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 
 class LinkAdapter (private val links: ArrayList<Link>) : RecyclerView.Adapter<LinkViewHolder> () {

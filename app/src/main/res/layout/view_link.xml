@@ -10,5 +10,6 @@
         android:layout_height="wrap_content"
         android:paddingVertical="8dp"
         android:paddingHorizontal="2dp"
-        tools:text="https://example.com/page/" />
+        tools:text="https://example.com/page/"
+        android:drawableRight="@drawable/action_on_next_activity"/>
 </LinearLayout>

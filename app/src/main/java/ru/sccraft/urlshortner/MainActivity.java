@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     static boolean разрешить_использование_интендификатора = false;
     Fe fe;
     boolean задать_адаптер = false;
+    TextView no_links;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         rw = findViewById(R.id.rw);
+        no_links = findViewById(R.id.no_links);
         file = fileList();
         fe = new Fe(this);
         {
@@ -73,9 +76,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!задать_адаптер) {
-            //TODO: Нет ссылок, которые сокращены
+            rw.setVisibility(View.GONE);
+            no_links.setVisibility(View.VISIBLE);
             return;
         }
+        no_links.setVisibility(View.GONE);
+        rw.setVisibility(View.VISIBLE);
         LinkAdapter la = new LinkAdapter(links);
         rw.setAdapter(la);
     }

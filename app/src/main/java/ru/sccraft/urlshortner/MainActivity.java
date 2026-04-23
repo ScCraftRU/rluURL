@@ -7,6 +7,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.Menu;
@@ -15,19 +16,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListView lw;
+    RecyclerView rw;
     String[] file;
     ArrayList<Link> links;
     private static final String LOG_TAG = "MainActivity";
-    private boolean разрешить_использование_интендификатора = false;
+    static boolean разрешить_использование_интендификатора = false;
     Fe fe;
     boolean задать_адаптер = false;
+    TextView no_links;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        lw = findViewById(R.id.lw);
+        rw = findViewById(R.id.rw);
+        no_links = findViewById(R.id.no_links);
         file = fileList();
         fe = new Fe(this);
         {
@@ -72,25 +76,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!задать_адаптер) {
-            lw.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.noLinksHistory)));
+            rw.setVisibility(View.GONE);
+            no_links.setVisibility(View.VISIBLE);
             return;
         }
-        String[] длинные_ссылки = new String[links.size()];
-        for(int i = 0; i < links.size(); i++) {
-            длинные_ссылки[i] = links.get(i).longU;
-            if (длинные_ссылки[i] == null) {
-                Log.e(LOG_TAG, "В массиве \"Длинные ссылки\" на индексе №" + i + " обнаружен NULL");
-                длинные_ссылки[i] = "";
-            }
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, длинные_ссылки);
-        lw.setAdapter(adapter);
-        lw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                info(links.get(position));
-            }
-        });
+        no_links.setVisibility(View.GONE);
+        rw.setVisibility(View.VISIBLE);
+        LinkAdapter la = new LinkAdapter(links);
+        rw.setAdapter(la);
     }
 
     @Override

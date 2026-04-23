@@ -18,6 +18,7 @@
     <string name="info_short">Short URL</string>
     <string name="info_long">Long URL</string>
     <string name="info_tittle">Link detalis</string>
+    <string name="no_links">No shortened links!</string>
     <string-array name="noLinksHistory">
         <item>No shortened links!</item>
         <item>To use history, shorten at least 1 link</item>

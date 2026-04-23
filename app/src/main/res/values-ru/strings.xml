@@ -18,6 +18,7 @@
     <string name="info_long">Длинная ссылка</string>
     <string name="info_short">Короткая ссылка</string>
     <string name="info_tittle">Ссылка</string>
+    <string name="no_links">Нет сокращённых ссылок!</string>
     <string-array name="noLinksHistory">
         <item>Нет сокращённых ссылок!</item>
         <item>Для использования этой истории, сократите, как минимум, 1 ссылку</item>
